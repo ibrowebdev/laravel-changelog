@@ -117,6 +117,7 @@ class ChangelogServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 InstallCommand::class,
+                \Ibrohim\Changelog\Console\ImportCommand::class,
             ]);
         }
     }

@@ -107,7 +107,21 @@ php artisan changelog:install --repo=your-org/your-app --secret=your-webhook-sec
 5. Select **Just the push event**
 6. Click **Add webhook**
 
-### 3. How It Works
+### 3. Importing Historical Commits
+
+If you've just installed the package and want to backfill your changelog with past commits, use the import command:
+
+```bash
+php artisan changelog:import owner/repo --limit=50
+```
+
+- `--limit=50`: The maximum number of historical commits to fetch (1-100 per request).
+- `--branch=main`: The specific branch to fetch from (defaults to the repo's configured default branch).
+- `--token=xxx`: Your GitHub Personal Access Token (recommended to avoid rate limits or for fetching from private repositories).
+
+All imported commits will be processed and added to your dashboard as **draft** entries awaiting your review.
+
+### 4. How It Works
 
 ```
 GitHub push → POST /changelog/webhook
