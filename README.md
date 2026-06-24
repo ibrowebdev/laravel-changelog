@@ -65,8 +65,33 @@ return [
 
     // Entries per page on the public changelog
     'per_page' => 15,
+
+    // AI Integration
+    'ai' => [
+        'provider' => env('CHANGELOG_AI_PROVIDER', 'openai'),
+        'model' => env('CHANGELOG_AI_MODEL', 'gpt-4o-mini'),
+    ],
 ];
 ```
+
+### AI Commit Translation
+
+The package integrates directly with the official [Laravel AI SDK](https://github.com/laravel/ai) to automatically rewrite your raw, technical git commits into beautiful, customer-friendly changelog entries.
+
+To enable this, simply define your preferred provider and model in your application's `.env` file:
+
+```env
+CHANGELOG_AI_PROVIDER=openai
+CHANGELOG_AI_MODEL=gpt-4o-mini
+```
+
+Because the package uses `laravel/ai` under the hood, it will automatically look for the standard API keys for your chosen provider in your `.env` file. For example, if you choose `openai`, you just need to ensure your key is set:
+
+```env
+OPENAI_API_KEY="sk-..."
+```
+
+If the API key is missing or the request fails, the package will safely fallback to standard commit parsing.
 
 ### Customising Dashboard Access
 
