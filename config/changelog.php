@@ -65,4 +65,20 @@ return [
 
     'per_page' => 15,
 
+    /*
+    |--------------------------------------------------------------------------
+    | AI Integration (laravel/ai)
+    |--------------------------------------------------------------------------
+    |
+    | The package uses the official Laravel AI SDK to automatically translate
+    | raw git commit messages into customer-friendly changelog entries.
+    | Set your preferred provider and model below.
+    |
+    */
+
+    'ai' => [
+        'provider' => env('CHANGELOG_AI_PROVIDER', 'openai'),
+        'model' => env('CHANGELOG_AI_MODEL', 'gpt-4o-mini'),
+    ],
+
 ];

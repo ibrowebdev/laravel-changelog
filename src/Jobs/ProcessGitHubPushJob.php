@@ -140,6 +140,32 @@ class ProcessGitHubPushJob implements ShouldQueue
             // owner can always override this in the dashboard.
             $type = $this->detectType($title);
 
+            // ── AI Commit Rewrite ───────────────────────────────────────
+            //
+            // If laravel/ai is installed and a provider is configured, we pass the raw
+            // commit message to our AI Agent to rewrite it into a user-friendly format.
+            if (class_exists(\Laravel\Ai\AiServiceProvider::class) && config('changelog.ai.provider')) {
+                try {
+                    $response = \Ibrohim\Changelog\Agents\ChangelogAgent::make()->prompt(
+                        prompt: $message,
+                        provider: config('changelog.ai.provider'),
+                        model: config('changelog.ai.model')
+                    );
+                    
+                    // Strip potential Markdown JSON code blocks
+                    $content = trim(str_replace(['```json', '```'], '', $response->content()));
+                    $aiData = json_decode($content, true);
+
+                    if (json_last_error() === JSON_ERROR_NONE && is_array($aiData)) {
+                        $title = $aiData['title'] ?? $title;
+                        $body = $aiData['body'] ?? $body;
+                        $type = $aiData['type'] ?? $type;
+                    }
+                } catch (\Exception $e) {
+                    \Illuminate\Support\Facades\Log::warning("Changelog AI processing failed for commit {$sha}: " . $e->getMessage());
+                }
+            }
+
             // ── Create or update the entry ──────────────────────────────
             //
             // updateOrCreate() is keyed on [repository_id, commit_sha].
