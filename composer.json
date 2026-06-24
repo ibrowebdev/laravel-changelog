@@ -1,0 +1,57 @@
+{
+    "name": "ibrohim/laravel-changelog",
+    "description": "A Laravel package that syncs GitHub commits into editable changelog entries with a dashboard, public page, and embeddable widget.",
+    "keywords": [
+        "laravel",
+        "changelog",
+        "github",
+        "webhook",
+        "release-notes"
+    ],
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Ibrohim",
+            "email": "ibrohim@example.com"
+        }
+    ],
+    "require": {
+        "php": "^8.4|^8.5",
+        "illuminate/contracts": "^11.0|^12.0|^13.0",
+        "illuminate/support": "^11.0|^12.0|^13.0",
+        "illuminate/database": "^11.0|^12.0|^13.0",
+        "illuminate/http": "^11.0|^12.0|^13.0",
+        "illuminate/routing": "^11.0|^12.0|^13.0",
+        "illuminate/queue": "^11.0|^12.0|^13.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^9.0|^10.0|^11.0",
+        "phpunit/phpunit": "^11.0|^12.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ibrohim\\Changelog\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Ibrohim\\Changelog\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Ibrohim\\Changelog\\ChangelogServiceProvider"
+            ],
+            "aliases": {
+                "Changelog": "Ibrohim\\Changelog\\Facades\\Changelog"
+            }
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
