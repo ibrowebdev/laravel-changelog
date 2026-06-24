@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
 
             // The GitHub-provided numeric repository ID for fast webhook matching
-            $table->unsignedBigInteger('github_id')->unique();
+            $table->unsignedBigInteger('github_id')->nullable()->unique();
 
             // The owner (user or org) extracted for convenience
             $table->string('owner');

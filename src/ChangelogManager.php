@@ -54,7 +54,7 @@ class ChangelogManager
     ): ChangelogRepository {
         return ChangelogRepository::create([
             'name' => "{$owner}/{$repo}",
-            'github_id' => 0, // Will be updated on first webhook delivery
+            'github_id' => null, // Will be updated on first webhook delivery
             'owner' => $owner,
             'repo' => $repo,
             'default_branch' => $branch,

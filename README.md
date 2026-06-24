@@ -26,7 +26,7 @@ A Laravel package that automatically syncs GitHub commits into editable changelo
 ## Installation
 
 ```bash
-composer require ibrohim/laravel-changelog
+composer require ibrohim/laravel-changelog:@dev
 ```
 
 The package uses Laravel's auto-discovery, so the service provider and facade are registered automatically.
