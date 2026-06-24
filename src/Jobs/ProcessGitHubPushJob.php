@@ -153,7 +153,7 @@ class ProcessGitHubPushJob implements ShouldQueue
                     );
                     
                     // Strip potential Markdown JSON code blocks
-                    $content = trim(str_replace(['```json', '```'], '', $response->content()));
+                    $content = trim(str_replace(['```json', '```'], '', $response->text));
                     $aiData = json_decode($content, true);
 
                     if (json_last_error() === JSON_ERROR_NONE && is_array($aiData)) {
