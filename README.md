@@ -37,11 +37,15 @@ Run the install command to publish the config, run migrations, and optionally re
 php artisan changelog:install
 ```
 
-Or do it manually:
+```bash
+php artisan migrate
+```
+
+*(Optional)* If you want to customize the configuration or the database migrations, you can publish them to your app:
 
 ```bash
 php artisan vendor:publish --tag=changelog-config
-php artisan migrate
+php artisan vendor:publish --tag=changelog-migrations
 ```
 
 > **Note on Production:** If you are deploying to a production server where running interactive commands is difficult, you can skip registering a repository during install. Instead, simply visit the **Repositories Dashboard** at `/changelog/dashboard/repositories` in your browser to securely add your GitHub repository and webhook secret.
