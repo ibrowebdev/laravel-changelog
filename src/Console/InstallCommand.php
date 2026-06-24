@@ -46,7 +46,15 @@ class InstallCommand extends Command
             ]);
         });
 
-        // ── Step 2: Run migrations ──────────────────────────────────────
+        // ── Step 2: Publish migrations ──────────────────────────────────
+        $this->components->task('Publishing migrations', function () {
+            $this->callSilently('vendor:publish', [
+                '--tag' => 'changelog-migrations',
+                '--force' => false,
+            ]);
+        });
+
+        // ── Step 3: Run migrations ──────────────────────────────────────
         $this->components->task('Running migrations', function () {
             $this->callSilently('migrate', [
                 '--force' => $this->laravel->environment('production'),
@@ -55,7 +63,7 @@ class InstallCommand extends Command
 
         $this->newLine();
 
-        // ── Step 3: Register a repository (optional) ────────────────────
+        // ── Step 4: Register a repository (optional) ────────────────────
         if ($this->option('repo') || $this->confirm('Would you like to register a GitHub repository now?', true)) {
             $this->registerRepository($manager);
         }
