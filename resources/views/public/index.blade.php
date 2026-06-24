@@ -202,19 +202,7 @@
                                             <h3 class="text-lg font-semibold text-gray-900">{{ $entry->title }}</h3>
                                         </div>
 
-                                        {{-- Commit link --}}
-                                        @if($entry->commit_url)
-                                            <a href="{{ $entry->commit_url }}"
-                                               target="_blank"
-                                               rel="noopener noreferrer"
-                                               class="inline-flex items-center gap-1.5 rounded-lg border border-gray-200 bg-gray-50 px-2.5 py-1 font-mono text-xs text-gray-500 transition hover:bg-gray-100 hover:text-gray-700"
-                                               title="View commit on GitHub">
-                                                {{ $entry->short_sha }}
-                                                <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
-                                                </svg>
-                                            </a>
-                                        @endif
+
                                     </div>
 
                                     {{-- Body --}}
@@ -226,12 +214,7 @@
 
                                     {{-- Footer meta --}}
                                     <div class="mt-4 flex items-center gap-4 text-xs text-gray-400">
-                                        <span class="flex items-center gap-1">
-                                            <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
-                                            </svg>
-                                            {{ $entry->author_name }}
-                                        </span>
+
                                         <span>{{ $entry->published_at->diffForHumans() }}</span>
                                     </div>
                                 </article>
@@ -253,7 +236,7 @@
     {{-- Footer --}}
     <footer class="border-t border-gray-100 bg-white/40 backdrop-blur-sm">
         <div class="mx-auto max-w-3xl px-6 py-8 text-center text-xs text-gray-400">
-            Powered by <a href="https://github.com/ibrohim/laravel-changelog" target="_blank" class="font-medium text-brand-500 transition hover:text-brand-600">Laravel Changelog</a>
+            Powered by <a href="https://github.com/ibrowebdev/laravel-changelog" target="_blank" class="font-medium text-brand-500 transition hover:text-brand-600">Laravel Changelog</a>
         </div>
     </footer>
 
