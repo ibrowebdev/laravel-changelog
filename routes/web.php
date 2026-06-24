@@ -63,6 +63,16 @@ Route::prefix("{$prefix}/dashboard")
 
         Route::delete('/entries/{id}', [DashboardController::class, 'destroy'])
             ->name('changelog.dashboard.destroy');
+
+        // Repository Management
+        Route::get('/repositories', [DashboardController::class, 'repositories'])
+            ->name('changelog.dashboard.repositories');
+
+        Route::post('/repositories', [DashboardController::class, 'storeRepository'])
+            ->name('changelog.dashboard.store-repository');
+
+        Route::delete('/repositories/{id}', [DashboardController::class, 'destroyRepository'])
+            ->name('changelog.dashboard.destroy-repository');
     });
 
 // ── Public Routes ────────────────────────────────────────────────────────

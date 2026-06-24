@@ -44,6 +44,8 @@ php artisan vendor:publish --tag=changelog-config
 php artisan migrate
 ```
 
+> **Note on Production:** If you are deploying to a production server where running interactive commands is difficult, you can skip registering a repository during install. Instead, simply visit the **Repositories Dashboard** at `/changelog/dashboard/repositories` in your browser to securely add your GitHub repository and webhook secret.
+
 ## Configuration
 
 After publishing, the config file is at `config/changelog.php`:
@@ -138,9 +140,11 @@ GitHub push → POST /changelog/webhook
 | Route | Method | Description |
 |-------|--------|-------------|
 | `/changelog` | GET | Public changelog page |
-| `/changelog/webhook` | POST | GitHub webhook endpoint |
-| `/changelog/dashboard` | GET | Admin dashboard |
-| `/changelog/dashboard/entries/{id}/edit` | GET | Edit entry |
+| `/changelog/widget.js` | GET | Public script for the embedded widget |
+| `/changelog/webhook` | POST | Webhook endpoint (accepts GitHub push events) |
+| `/changelog/dashboard` | GET | Admin dashboard (list entries) |
+| `/changelog/dashboard/entries/{id}/edit` | GET | Edit entry form |
+| `/changelog/dashboard/repositories` | GET | Manage connected GitHub repositories |
 | `/changelog/dashboard/entries/{id}` | PUT | Update entry |
 | `/changelog/dashboard/entries/{id}/publish` | POST | Publish entry |
 | `/changelog/dashboard/entries/{id}/unpublish` | POST | Unpublish entry |

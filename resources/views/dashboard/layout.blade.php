@@ -74,6 +74,10 @@
                         </div>
                         <span class="text-lg font-semibold tracking-tight text-gray-900">Changelog</span>
                     </a>
+                    <div class="hidden sm:ml-6 sm:flex sm:space-x-4">
+                        <a href="{{ route('changelog.dashboard.index') }}" class="{{ request()->routeIs('changelog.dashboard.index', 'changelog.dashboard.edit') ? 'bg-gray-100 text-gray-900' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900' }} rounded-md px-3 py-2 text-sm font-medium">Entries</a>
+                        <a href="{{ route('changelog.dashboard.repositories') }}" class="{{ request()->routeIs('changelog.dashboard.repositories') ? 'bg-gray-100 text-gray-900' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900' }} rounded-md px-3 py-2 text-sm font-medium">Repositories</a>
+                    </div>
                 </div>
 
                 {{-- Right side nav items --}}

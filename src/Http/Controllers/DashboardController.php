@@ -8,6 +8,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\View\View;
 use Ibrohim\Changelog\Models\ChangelogEntry;
 use Ibrohim\Changelog\Models\ChangelogRepository;
+use Ibrohim\Changelog\ChangelogManager;
 
 class DashboardController extends Controller
 {
@@ -147,5 +148,57 @@ class DashboardController extends Controller
         return redirect()
             ->route('changelog.dashboard.index')
             ->with('success', "Entry \"{$title}\" has been deleted.");
+    }
+
+    // ── Repository Management ────────────────────────────────────────────────
+
+    /**
+     * Display the repository management UI.
+     */
+    public function repositories(): View
+    {
+        $repositories = ChangelogRepository::orderBy('name')->get();
+
+        return view('changelog::dashboard.repositories', [
+            'repositories' => $repositories,
+        ]);
+    }
+
+    /**
+     * Store a newly created repository.
+     */
+    public function storeRepository(Request $request, ChangelogManager $manager): RedirectResponse
+    {
+        $validated = $request->validate([
+            'owner'          => 'required|string|max:100',
+            'repo'           => 'required|string|max:100',
+            'webhook_secret' => 'required|string|max:255',
+            'default_branch' => 'required|string|max:100',
+        ]);
+
+        $manager->addRepository(
+            $validated['owner'],
+            $validated['repo'],
+            $validated['webhook_secret'],
+            $validated['default_branch']
+        );
+
+        return redirect()
+            ->route('changelog.dashboard.repositories')
+            ->with('success', "Repository {$validated['owner']}/{$validated['repo']} registered successfully.");
+    }
+
+    /**
+     * Delete a repository and all its changelog entries.
+     */
+    public function destroyRepository(int $id): RedirectResponse
+    {
+        $repository = ChangelogRepository::findOrFail($id);
+        $name = $repository->name;
+        $repository->delete(); // This cascades and deletes the entries in the DB
+
+        return redirect()
+            ->route('changelog.dashboard.repositories')
+            ->with('success', "Repository \"{$name}\" and all its entries have been deleted.");
     }
 }
