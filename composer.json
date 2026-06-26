@@ -12,8 +12,10 @@
     "type": "library",
     "authors": [
         {
-            "name": "Ibrohim",
-            "email": "ibrohim@example.com"
+            "name": "Yusuf Ibrohim",
+            "email": "yusufikeolapo2002@gmail.com",
+            "homepage": "https://github.com/ibrowebdev",
+            "role": "Creator/Developer"
         }
     ],
     "require": {
